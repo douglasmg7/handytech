@@ -2,4 +2,4 @@
 # -s see prints
 # -v more verbose
 
-pytest ./test_zunka.py -k check_zunka_products_consistence -sv
+pytest ./test_xml_util.py::TestXml -k convert -sv
