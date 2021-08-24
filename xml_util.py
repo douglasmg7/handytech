@@ -47,7 +47,7 @@ def upsert_on_db(root):
         for item in root:
             try:
                 product = Product() 
-                product.it_code = handytech.get_it_codigo(item)
+                product.it_codigo = handytech.get_it_codigo(item)
                 product.desc_item = handytech.get_desc_item(item)
                 product.desc_item_ec = handytech.get_desc_item_ec(item)
                 product.narrativa_ec = handytech.get_narrativa_ec(item)

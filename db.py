@@ -1,8 +1,9 @@
 #!/usr/bin/env python
 import os
+import datetime
 from logger import debug, info, warning, error, critical
 
-from sqlalchemy import create_engine, text, MetaData, Table, Column, Integer, String
+from sqlalchemy import create_engine, text, MetaData, Table, Column, Integer, String, DateTime
 #  from sqlalchemy.orm import registry
 from sqlalchemy.orm import declarative_base, Session
 
@@ -14,7 +15,8 @@ session = Session(engine)
 
 class Product(Base):
     __tablename__ = 'product'
-    it_code = Column(String, primary_key=True)
+    zunka_product_id = Column(String)
+    it_codigo = Column(String, primary_key=True)
     desc_item = Column(String)
     desc_item_ec = Column(String)
     narrativa_ec = Column(String)
@@ -24,13 +26,14 @@ class Product(Base):
     perc_preco_sugerido_solar = Column(Integer)
     preco_sugerido = Column(Integer)
     preco_maximo = Column(Integer)
-    category = Column(String)
-    sub_categoriacategory = Column(String)
+    categoria = Column(String)
+    sub_categoria = Column(String)
     peso = Column(Integer)
     codigo_refer = Column(String)
     fabricante = Column(String)
     saldos = Column(Integer)
     arquivo_imagem = Column(String)
+    created_at = Column(DateTime, default=datetime.datetime.utcnow)
 
 #  product = Product(it_code='qwe', desc_item='asdf asdf ', vl_item=123)
 #  session.add(product)
