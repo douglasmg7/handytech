@@ -43,6 +43,7 @@ def get_makers(root):
 
 # Upsert on db.
 def upsert_on_db(root):
+    debug(f'Processing {len(root)} products')
     with Session(engine) as sess:
         for item in root:
             try:
@@ -70,10 +71,6 @@ def upsert_on_db(root):
             sess.merge(product)
         sess.commit()
 
-tree = ET.parse(os.environ['HANDYTECH_XML'])
-root = tree.getroot()
-upsert_on_db(root)
-
 # Print the first item.
 #  print_item(root[0])
 
@@ -86,6 +83,9 @@ upsert_on_db(root)
 #  print(get_categories(root))
 #  print(get_makers(root))
 
+tree = ET.parse(os.environ['HANDYTECH_XML'])
+root = tree.getroot()
+upsert_on_db(root)
 
-
-
+# Remove file, next will be download.
+os.remove(os.environ['HANDYTECH_XML'])

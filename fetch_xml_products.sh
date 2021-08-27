@@ -21,15 +21,6 @@ if [ -f $FILE_LAST ]; then
     exit 0
 fi
 
-FILE_LAST_TIME_PRODUCT_WAS_DOWNLOADED=$XML_PATH/handytech_products_last_time_download.time
-if [[ -f $FILE_LAST_TIME_PRODUCT_WAS_DOWNLOADED ]]; then
-    LAST_TIME_PRODUCT_WAS_DOWNLOADED=$(cat $FILE_LAST_TIME_PRODUCT_WAS_DOWNLOADED)
-    echo Last time products was downloaded: $LAST_TIME_PRODUCT_WAS_DOWNLOADED
-else
-    LAST_TIME_PRODUCT_WAS_DOWNLOADED=2018-01-01T03:00:00-03:00
-    echo Products was never downloaded, using: $LAST_TIME_PRODUCT_WAS_DOWNLOADED
-fi
-
 # XML file backup.
 FILE_BACKUP=$XML_PATH/handytech_products_${NOW}.xml
 
@@ -48,5 +39,4 @@ fi
 # echo size: $FILE_SIZE
 if [[ "$FILE_SIZE" -gt "1000" ]]; then
     cp $FILE_BACKUP $FILE_LAST
-    echo $NOW > $FILE_LAST_TIME_PRODUCT_WAS_DOWNLOADED
 fi

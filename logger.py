@@ -48,7 +48,7 @@ logging.addLevelName(logging.ERROR, 'error')
 logging.addLevelName(logging.CRITICAL, 'critical')
 
 # config
-logger = logging.getLogger('[meli]')
+logger = logging.getLogger('[handytech]')
 logger.setLevel(logging.DEBUG)
 formatter = MyFormatter()
 
