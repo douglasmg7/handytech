@@ -6,6 +6,8 @@ import xml.etree.ElementTree as ET
 from sqlalchemy.orm import Session
 from db import Product, engine
 
+xml_file = os.environ['HANDYTECH_XML']
+
 #  from handytech import HandytechProduct
 import handytech
 #  import sqlite3
@@ -44,7 +46,7 @@ def get_makers(root):
 
 # Upsert on db.
 def upsert_on_db(root):
-    debug(f'Processing {len(root)} products')
+    info(f'Processing {len(root)} products')
     with Session(engine) as sess:
         for item in root:
             try:
@@ -84,9 +86,12 @@ def upsert_on_db(root):
 #  print(get_categories(root))
 #  print(get_makers(root))
 
-tree = ET.parse(os.environ['HANDYTECH_XML'])
-root = tree.getroot()
-upsert_on_db(root)
+if os.path.exists(xml_file):
+    tree = ET.parse(xml_file)
+    root = tree.getroot()
+    upsert_on_db(root)
+    # Remove file, next will be download.
+    os.remove(xml_file)
+else:
+    info(f'No {xml_file} to be processed')
 
-# Remove file, next will be download.
-os.remove(os.environ['HANDYTECH_XML'])
